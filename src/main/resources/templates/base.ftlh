@@ -338,11 +338,23 @@
 <body>
     <!-- Top Header -->
     <header class="top-header">
-        <div class="d-flex align-items-center justify-content-between">
+        <div class="d-flex align-items-center justify-content-between gap-3">
             <h1 class="brand-name mb-0">DELAWARE</h1>
-            <button class="btn btn-link text-white d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#sidebarOffcanvas">
-                <i class="bi bi-list fs-3"></i>
-            </button>
+            <div class="d-flex align-items-center gap-3">
+                <#if currentUserName??>
+                    <div class="text-end d-none d-sm-block">
+                        <div class="fw-semibold">${currentUserName}</div>
+                        <small class="text-white-50">${(currentUserRole!"")?lower_case?cap_first}</small>
+                    </div>
+                    <a href="/logout" class="btn btn-outline-light btn-sm d-none d-md-inline-flex align-items-center gap-1">
+                        <i class="bi bi-box-arrow-right"></i>
+                        Logout
+                    </a>
+                </#if>
+                <button class="btn btn-link text-white d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#sidebarOffcanvas">
+                    <i class="bi bi-list fs-3"></i>
+                </button>
+            </div>
         </div>
     </header>
 
@@ -388,6 +400,14 @@
                                 <span>Transaction History</span>
                             </a>
                         </li>
+                        <#if currentUserName??>
+                        <li class="nav-item mt-4">
+                            <a class="nav-link" href="/logout">
+                                <i class="bi bi-box-arrow-right"></i>
+                                <span>Logout</span>
+                            </a>
+                        </li>
+                        </#if>
                     </ul>
                 </div>
             </nav>
@@ -437,6 +457,14 @@
                                 <span>Transaction History</span>
                             </a>
                         </li>
+                        <#if currentUserName??>
+                        <li class="nav-item mt-4">
+                            <a class="nav-link" href="/logout">
+                                <i class="bi bi-box-arrow-right"></i>
+                                <span>Logout</span>
+                            </a>
+                        </li>
+                        </#if>
                     </ul>
                 </div>
             </div>
