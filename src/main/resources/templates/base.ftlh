@@ -291,6 +291,45 @@
             padding-top: 0;
         }
 
+        /* Improve actions/buttons in tables on small screens */
+        @media (max-width: 576px) {
+            /* Make the action buttons larger and easier to tap */
+            .table tbody td .btn-group {
+                display: flex;
+                flex-direction: column; /* stack buttons vertically */
+                align-items: flex-end; /* keep them on the right */
+                gap: 0.4rem;
+            }
+
+            .table tbody td .btn-group .btn {
+                min-width: 44px; /* ensure comfortable tap target */
+                height: 44px;
+                padding: 0;
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                border-radius: 0.5rem;
+                font-size: 1.05rem;
+            }
+
+            /* If you prefer full-width actions, uncomment this block
+            .table tbody td .btn-group .btn {
+                width: 100%;
+            }
+            */
+
+            /* Reduce horizontal padding so table fits better */
+            .table thead th, .table tbody td {
+                padding: 0.6rem;
+            }
+
+            /* Keep badges and IDs compact */
+            .table td .badge {
+                font-size: 0.85rem;
+                padding: 0.35rem 0.55rem;
+            }
+        }
+
         <#if additionalStyles??>
         ${additionalStyles}
         </#if>
