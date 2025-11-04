@@ -129,6 +129,31 @@
             font-size: 2.5rem;
             font-weight: 700;
         }
+
+        .quick-actions-card .card-body {
+            padding: 1rem 1.25rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 0.75rem;
+        }
+
+        .quick-actions-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 0.5rem;
+        }
+
+        .quick-actions-card .btn {
+            font-weight: 600;
+            padding: 0.5rem 0.75rem;
+        }
+
+        @media (max-width: 991.98px) {
+            .quick-actions-grid {
+                grid-template-columns: 1fr;
+            }
+        }
         
         /* Tables */
         .table {

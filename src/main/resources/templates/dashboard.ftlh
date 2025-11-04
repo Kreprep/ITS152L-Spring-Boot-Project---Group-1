@@ -26,10 +26,13 @@
             </div>
         </div>
         <div class="col-md-12 col-lg-4">
-            <div class="card h-100">
-                <div class="card-body text-center">
-                    <h6 class="text-muted mb-2">Quick Actions</h6>
-                    <div class="d-flex flex-column gap-2">
+            <div class="card quick-actions-card h-100">
+                <div class="card-body">
+                    <div class="d-flex align-items-center justify-content-between">
+                        <h6 class="text-muted mb-0">Quick Actions</h6>
+                        <i class="bi bi-lightning-charge text-primary"></i>
+                    </div>
+                    <div class="quick-actions-grid">
                         <a href="/manage-products" class="btn btn-primary btn-sm">
                             <i class="bi bi-plus-circle me-1"></i> Add Product
                         </a>
