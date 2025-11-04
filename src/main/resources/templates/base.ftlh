@@ -376,24 +376,28 @@
                                 <span>Overview</span>
                             </a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link <#if activePage?? && activePage == 'products'>active</#if>" href="/manage-products">
-                                <i class="bi bi-box-seam"></i>
-                                <span>Manage Products</span>
-                            </a>
-                        </li>
+                        <#if !currentUserRole?? || currentUserRole?upper_case == "ADMIN">
+                            <li class="nav-item">
+                                <a class="nav-link <#if activePage?? && activePage == 'products'>active</#if>" href="/manage-products">
+                                    <i class="bi bi-box-seam"></i>
+                                    <span>Manage Products</span>
+                                </a>
+                            </li>
+                        </#if>
                         <li class="nav-item">
                             <a class="nav-link <#if activePage?? && activePage == 'sales'>active</#if>" href="/sales">
                                 <i class="bi bi-cart-check"></i>
                                 <span>Sales</span>
                             </a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link <#if activePage?? && activePage == 'orders'>active</#if>" href="/orders">
-                                <i class="bi bi-truck"></i>
-                                <span>Orders</span>
-                            </a>
-                        </li>
+                        <#if !currentUserRole?? || currentUserRole?upper_case == "ADMIN">
+                            <li class="nav-item">
+                                <a class="nav-link <#if activePage?? && activePage == 'orders'>active</#if>" href="/orders">
+                                    <i class="bi bi-truck"></i>
+                                    <span>Orders</span>
+                                </a>
+                            </li>
+                        </#if>
                         <li class="nav-item">
                             <a class="nav-link <#if activePage?? && activePage == 'history'>active</#if>" href="/transaction-history">
                                 <i class="bi bi-clock-history"></i>
@@ -433,24 +437,28 @@
                                 <span>Overview</span>
                             </a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link <#if activePage?? && activePage == 'products'>active</#if>" href="/manage-products">
-                                <i class="bi bi-box-seam"></i>
-                                <span>Manage Products</span>
-                            </a>
-                        </li>
+                        <#if !currentUserRole?? || currentUserRole?upper_case == "ADMIN">
+                            <li class="nav-item">
+                                <a class="nav-link <#if activePage?? && activePage == 'products'>active</#if>" href="/manage-products">
+                                    <i class="bi bi-box-seam"></i>
+                                    <span>Manage Products</span>
+                                </a>
+                            </li>
+                        </#if>
                         <li class="nav-item">
                             <a class="nav-link <#if activePage?? && activePage == 'sales'>active</#if>" href="/sales">
                                 <i class="bi bi-cart-check"></i>
                                 <span>Sales</span>
                             </a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link <#if activePage?? && activePage == 'orders'>active</#if>" href="/orders">
-                                <i class="bi bi-truck"></i>
-                                <span>Orders</span>
-                            </a>
-                        </li>
+                        <#if !currentUserRole?? || currentUserRole?upper_case == "ADMIN">
+                            <li class="nav-item">
+                                <a class="nav-link <#if activePage?? && activePage == 'orders'>active</#if>" href="/orders">
+                                    <i class="bi bi-truck"></i>
+                                    <span>Orders</span>
+                                </a>
+                            </li>
+                        </#if>
                         <li class="nav-item">
                             <a class="nav-link <#if activePage?? && activePage == 'history'>active</#if>" href="/transaction-history">
                                 <i class="bi bi-clock-history"></i>

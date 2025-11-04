@@ -33,9 +33,11 @@
                         <i class="bi bi-lightning-charge text-primary"></i>
                     </div>
                     <div class="quick-actions-grid">
-                        <a href="/manage-products" class="btn btn-primary btn-sm">
-                            <i class="bi bi-plus-circle me-1"></i> Add Product
-                        </a>
+                        <#if !currentUserRole?? || currentUserRole?upper_case == "ADMIN">
+                            <a href="/manage-products" class="btn btn-primary btn-sm">
+                                <i class="bi bi-plus-circle me-1"></i> Add Product
+                            </a>
+                        </#if>
                         <a href="/sales" class="btn btn-outline-primary btn-sm">
                             <i class="bi bi-cart-check me-1"></i> Create Sale
                         </a>
@@ -93,12 +95,14 @@
                             <i class="bi bi-check-circle me-2"></i>All products are above the alert threshold.
                         </div>
                     </#if>
-                    <div class="text-end mt-3">
-                        <a href="/manage-products" class="btn btn-outline-warning btn-sm">
-                            Manage inventory
-                            <i class="bi bi-arrow-right ms-1"></i>
-                        </a>
-                    </div>
+                    <#if !currentUserRole?? || currentUserRole?upper_case == "ADMIN">
+                        <div class="text-end mt-3">
+                            <a href="/manage-products" class="btn btn-outline-warning btn-sm">
+                                Manage inventory
+                                <i class="bi bi-arrow-right ms-1"></i>
+                            </a>
+                        </div>
+                    </#if>
                 </div>
             </div>
         </div>
