@@ -24,6 +24,58 @@
         </div>
     </#if>
 
+    <#if hasLowStock?? && hasLowStock>
+        <div class="card border-warning mb-4">
+            <div class="card-header bg-warning-subtle text-warning d-flex justify-content-between align-items-center">
+                <div>
+                    <i class="bi bi-exclamation-triangle me-2"></i>Inventory Alerts
+                </div>
+                <div class="d-flex align-items-center gap-2">
+                    <span class="badge bg-danger-subtle text-danger">
+                        <i class="bi bi-slash-circle me-1"></i>${(outOfStockCount!0)?c} out of stock
+                    </span>
+                    <span class="badge bg-warning text-dark">
+                        <i class="bi bi-exclamation-circle me-1"></i>${(lowStockCount!0)?c} low stock
+                    </span>
+                </div>
+            </div>
+            <div class="card-body">
+                <p class="text-muted small mb-3">The following products are at or below the ${(lowStockThreshold!0)} unit threshold.</p>
+                <#if lowStockPreview?? && lowStockPreview?has_content>
+                    <div class="list-group list-group-flush">
+                        <#list lowStockPreview as p>
+                            <div class="list-group-item d-flex justify-content-between align-items-center">
+                                <div>
+                                    <div class="fw-semibold">${p.name}</div>
+                                    <small class="text-muted">
+                                        <#if p.branch?? && p.branch?has_content>${p.branch}</#if>
+                                        <#if p.company?? && p.company?has_content>
+                                            <#if p.branch?? && p.branch?has_content> • </#if>${p.company}
+                                        </#if>
+                                    </small>
+                                </div>
+                                <span class="badge <#if (p.quantity?default(0) == 0)>bg-danger<#else>bg-warning text-dark</#if>">
+                                    ${p.quantity?default(0)} units
+                                </span>
+                            </div>
+                        </#list>
+                    </div>
+                </#if>
+                <#if (lowStockExtraCount!0) gt 0>
+                    <div class="text-muted small mt-3">
+                        +${(lowStockExtraCount!0)} more items below threshold
+                    </div>
+                </#if>
+                <div class="text-end mt-3">
+                    <a href="#productsTable" class="btn btn-outline-warning btn-sm">
+                        Review all products
+                        <i class="bi bi-arrow-right ms-1"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </#if>
+
     <!-- Add Product Form (Collapsible) -->
     <div class="collapse mb-4" id="addProductForm">
         <div class="card">

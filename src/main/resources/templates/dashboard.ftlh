@@ -42,6 +42,65 @@
         </div>
     </div>
 
+    <!-- Inventory Alerts -->
+    <div class="row g-4 mb-4">
+        <div class="col-12">
+            <div class="card border-warning">
+                <div class="card-header bg-warning-subtle text-warning d-flex justify-content-between align-items-center">
+                    <div>
+                        <i class="bi bi-exclamation-triangle me-2"></i>Inventory Alerts
+                    </div>
+                    <div class="d-flex align-items-center gap-2">
+                        <span class="badge bg-danger-subtle text-danger">
+                            <i class="bi bi-slash-circle me-1"></i>${(outOfStockCount!0)?c} out of stock
+                        </span>
+                        <span class="badge bg-warning text-dark">
+                            <i class="bi bi-exclamation-circle me-1"></i>${(lowStockCount!0)?c} low stock
+                        </span>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <p class="text-muted small mb-3">Monitoring products at or below the ${(lowStockThreshold!0)} unit threshold.</p>
+                    <#if lowStockPreview?? && lowStockPreview?has_content>
+                        <div class="list-group list-group-flush">
+                            <#list lowStockPreview as p>
+                                <div class="list-group-item d-flex justify-content-between align-items-center">
+                                    <div>
+                                        <div class="fw-semibold">${p.name}</div>
+                                        <small class="text-muted">
+                                            <#if p.branch?? && p.branch?has_content>${p.branch}</#if>
+                                            <#if p.itemType?? && p.itemType?has_content>
+                                                <#if p.branch?? && p.branch?has_content> • </#if>${p.itemType}
+                                            </#if>
+                                        </small>
+                                    </div>
+                                    <span class="badge <#if (p.quantity?default(0) == 0)>bg-danger<#else>bg-warning text-dark</#if>">
+                                        ${p.quantity?default(0)} units
+                                    </span>
+                                </div>
+                            </#list>
+                        </div>
+                        <#if (lowStockExtraCount!0) gt 0>
+                            <div class="text-muted small mt-3">
+                                +${(lowStockExtraCount!0)} more items below threshold
+                            </div>
+                        </#if>
+                    <#else>
+                        <div class="alert alert-success mb-0">
+                            <i class="bi bi-check-circle me-2"></i>All products are above the alert threshold.
+                        </div>
+                    </#if>
+                    <div class="text-end mt-3">
+                        <a href="/manage-products" class="btn btn-outline-warning btn-sm">
+                            Manage inventory
+                            <i class="bi bi-arrow-right ms-1"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Recent Products Table -->
     <div class="card">
         <div class="card-header">

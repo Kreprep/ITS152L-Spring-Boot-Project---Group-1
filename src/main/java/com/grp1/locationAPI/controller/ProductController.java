@@ -9,6 +9,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -27,6 +28,9 @@ public class ProductController {
     private IProductService productService;
     @Autowired
     private ISaleService saleService;
+
+    @Value("${app.inventory.alert-threshold:5}")
+    private int lowStockThreshold;
     // ...existing code...
 
     @PostMapping("/add-product")
@@ -178,6 +182,22 @@ public class ProductController {
     private void populateProducts(Model model){
         List<Product> productList = productService.findAll();
         model.addAttribute("products", productList);
+    List<Product> lowStockProducts;
+    try {
+        lowStockProducts = productService.findLowStock(lowStockThreshold);
+    } catch (Exception ex) {
+        lowStockProducts = java.util.Collections.emptyList();
+    }
+    model.addAttribute("lowStockProducts", lowStockProducts);
+    model.addAttribute("lowStockPreview", lowStockProducts.stream().limit(5).collect(Collectors.toList()));
+    model.addAttribute("lowStockThreshold", lowStockThreshold);
+    model.addAttribute("lowStockCount", lowStockProducts.size());
+    model.addAttribute("lowStockExtraCount", Math.max(0, lowStockProducts.size() - 5));
+    long outOfStockCount = lowStockProducts.stream()
+        .filter(p -> (p.getQuantity() == null ? 0 : p.getQuantity()) == 0)
+        .count();
+    model.addAttribute("outOfStockCount", outOfStockCount);
+    model.addAttribute("hasLowStock", !lowStockProducts.isEmpty());
         // populate filter options
         java.util.Set<String> types = new java.util.TreeSet<>();
         java.util.Set<String> brands = new java.util.TreeSet<>();

@@ -5,8 +5,10 @@ import com.grp1.locationAPI.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class ProductService implements IProductService {
@@ -41,5 +43,16 @@ public class ProductService implements IProductService {
         if (newQty < 0) newQty = 0;
         p.setQuantity(newQty);
         return repository.save(p);
+    }
+
+    @Override
+    public List<Product> findLowStock(int threshold) {
+        return findAll().stream()
+                .filter(p -> {
+                    int qty = p.getQuantity() == null ? 0 : p.getQuantity();
+                    return qty <= threshold;
+                })
+                .sorted(Comparator.comparingInt(p -> p.getQuantity() == null ? 0 : p.getQuantity()))
+                .collect(Collectors.toList());
     }
 }

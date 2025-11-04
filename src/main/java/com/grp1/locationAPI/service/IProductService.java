@@ -11,4 +11,5 @@ public interface IProductService {
     Product save(Product product);
     void deleteById(Long id);
     Product adjustQuantity(Long id, int delta);
+    List<Product> findLowStock(int threshold);
 }

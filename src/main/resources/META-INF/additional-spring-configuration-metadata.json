@@ -1,0 +1,10 @@
+{
+  "properties": [
+    {
+      "name": "app.inventory.alert-threshold",
+      "type": "java.lang.Integer",
+      "description": "Quantity threshold used to flag low inventory alerts.",
+      "defaultValue": 5
+    }
+  ]
+}
