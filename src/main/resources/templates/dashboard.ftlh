@@ -20,9 +20,9 @@
         <div class="col-md-6 col-lg-4">
             <div class="stat-card">
                 <div class="stat-label">
-                    <i class="bi bi-globe me-2"></i>Countries
+                    <i class="bi bi-hourglass-split me-2"></i>Pending Orders
                 </div>
-                <div class="stat-value">${countryCount?c}</div>
+                <div class="stat-value">${(pendingOrderCount!0)?c}</div>
             </div>
         </div>
         <div class="col-md-12 col-lg-4">

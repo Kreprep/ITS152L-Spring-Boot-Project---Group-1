@@ -6,13 +6,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import com.grp1.locationAPI.service.IPurchaseOrderService;
 import com.grp1.locationAPI.service.IProductService;
 import com.grp1.locationAPI.service.ISaleService;
-import com.grp1.locationAPI.service.ICountryService;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 import com.grp1.locationAPI.model.Product;
+import com.grp1.locationAPI.model.PurchaseOrder;
 
 @Controller
 public class DashboardController {
@@ -20,7 +21,7 @@ public class DashboardController {
     private IProductService productService;
 
     @Autowired
-    private ICountryService countryService;
+    private IPurchaseOrderService purchaseOrderService;
 
     @Autowired
     private ISaleService saleService;
@@ -32,12 +33,15 @@ public class DashboardController {
     public String dashboard(Model model){
         List<Product> products = productService.findAll();
         model.addAttribute("productCount", products == null ? 0 : products.size());
-        // keep countries disabled if table isn't present
+        long pendingOrderCount = 0;
         try {
-            model.addAttribute("countryCount", countryService.findAll().size());
+            pendingOrderCount = purchaseOrderService.findAll().stream()
+                    .filter(order -> order != null && order.getStatus() == PurchaseOrder.Status.PENDING)
+                    .count();
         } catch (Exception e) {
-            model.addAttribute("countryCount", 0);
+            pendingOrderCount = 0;
         }
+        model.addAttribute("pendingOrderCount", pendingOrderCount);
         model.addAttribute("recentProducts", products == null ? java.util.Collections.emptyList() : products.stream().limit(6).toList());
         List<Product> lowStockProducts;
         try {
