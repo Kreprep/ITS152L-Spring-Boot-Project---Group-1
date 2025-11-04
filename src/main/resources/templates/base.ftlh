@@ -254,6 +254,43 @@
             background: #555;
         }
         
+        /* Mobile Offcanvas (improve button/tap targets) */
+        .offcanvas .nav-link {
+            padding: 0.9rem 1.25rem;
+            font-size: 1.05rem; /* slightly larger for readability */
+            height: 3.125rem; /* ~50px tap target */
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            width: 100%;
+            border-left: none !important; /* remove desktop left bar for mobile drawer */
+            color: #adb5bd;
+            transition: background-color 0.15s ease, color 0.15s ease;
+        }
+
+        .offcanvas .nav-link i {
+            font-size: 1.25rem;
+            width: 28px;
+            flex: 0 0 28px;
+            text-align: center;
+        }
+
+        .offcanvas .nav-link span {
+            display: block;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .offcanvas .nav-link:hover, .offcanvas .nav-link:focus {
+            background-color: var(--sidebar-hover);
+            color: white;
+        }
+
+        .offcanvas .offcanvas-body {
+            padding-top: 0;
+        }
+
         <#if additionalStyles??>
         ${additionalStyles}
         </#if>
@@ -317,7 +354,8 @@
             </nav>
 
             <!-- Sidebar Offcanvas for Mobile -->
-            <div class="offcanvas offcanvas-start bg-dark" tabindex="-1" id="sidebarOffcanvas" aria-labelledby="sidebarOffcanvasLabel">
+            <!-- Changed to offcanvas-end so the mobile drawer opens from the right (matches hamburger button on the right) -->
+            <div class="offcanvas offcanvas-end bg-dark" tabindex="-1" id="sidebarOffcanvas" aria-labelledby="sidebarOffcanvasLabel">
                 <div class="offcanvas-header">
                     <h5 class="offcanvas-title text-white" id="sidebarOffcanvasLabel">Menu</h5>
                     <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
